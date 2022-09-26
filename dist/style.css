@@ -1,0 +1,15 @@
+.h1{
+        font-size: 34px;
+        color: green;
+    }
+    .p{
+        color: green;
+        font-size: 24px;
+    }
+    .h2{
+        color: blue;
+    }
+    .card {
+        display: flex;
+        flex-direction: row;
+    }

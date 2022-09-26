@@ -1,47 +1,87 @@
+// import { fileURLToPath } from 'url';
+
 const fs = require('fs');
 
 function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, (err) => 
-    err ? console.error(err) : console.log('Success!')
+    fs.writeFile(fileName, data, (err) =>
+        err ? console.error(err) : console.log('Success!')
     );
 }
 
 
-let boilerplate = `<!DOCTYPE html>
-<html lang="en">
+function createHTML(list) {
+    let boilerplate = `<!DOCTYPE html>
+<html lang="en-US">
+
   <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-  <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML 5 Boilerplate</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Hello HTML!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel = "stylesheet" href = 'style.css'>
   </head>
+
   <body>
-	<script src="index.js"></script>
-    <nav class = 'navbar'>
-        <h2 class = 'h2'>${response.linkedin}</h2>
-        <h2 class = 'h2'>${response.github}</h2>
-    </nav>
-    <div class = 'container-fluid'>
-        <h1 class = 'h1'>Hi my name is ${response.name}.</h1>
-        <p class = 'p'>I live in ${response.live}.</p>
-        <p class = 'p'>I am ${response.age} years old.</p>
-        <p class = 'p'>I was born in ${response.born}.</p>
-    </div>
+    <div class="card" style="width: 18rem;">
+
+        <div class="card-body">
+          <h5 class="card-title">${list[0].getRole()}</h5>
+          <p class="card-text">${list[0].getName()}</p>
+          <p class="card-text">${list[0].getId()}</p>
+          <a href = "mailto: ${list[0].getEmail()}">Send Email</a>
+          <p class="card-text">${list[0].getUnique()}</p>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">${list[1].getRole()}</h5>
+            <p class="card-text">${list[1].getName()}</p>
+            <p class="card-text">${list[1].getId()}</p>
+            <a href = "mailto: ${list[1].getEmail()}">Send Email</a>
+          <p class="card-text">${list[1].getUnique()}</p>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">${list[2].getRole()}</h5>
+            <p class="card-text">${list[2].getName()}</p>
+            <p class="card-text">${list[2].getId()}</p>
+            <a href = "mailto: ${list[2].getEmail()}">Send Email</a>
+          <p class="card-text">${list[2].getUnique()}</p>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">${list[3].getRole()}</h5>
+            <p class="card-text">${list[3].getName()}</p>
+            <p class="card-text">${list[3].getId()}</p>
+            <a href = "mailto: ${list[3].getEmail()}">Send Email</a>
+          <p class="card-text">${list[3].getUnique()}</p>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">${list[4].getRole()}</h5>
+            <p class="card-text">${list[4].getName()}</p>
+            <p class="card-text">${list[4].getId()}</p>
+            <a href = "mailto: ${list[4].getEmail()}">Send Email</a>
+          <p class="card-text">${list[4].getUnique()}</p>
+          </div>
+      </div>
   </body>
+
 </html>`
-let css = `.h1{
-    font-size: 34px;
-    color: green;
+writeToFile('./dist/index.html', boilerplate);
 }
-.p{
-    color: green;
-    font-size: 24px;
+function createCSS(){
+    let css = `.h1{
+        font-size: 34px;
+        color: green;
+    }
+    .p{
+        color: green;
+        font-size: 24px;
+    }
+    .h2{
+        color: blue;
+    }
+    .card {
+        display: flex;
+        flex-direction: row;
+    }`
+    writeToFile('./dist/style.css', css);
 }
-.h2{
-    color: blue;
-}`
-writeToFile('index.html', boilerplate);
-writeToFile('style.css', css);
-    console.log(response)
+
+
+module.exports = {createHTML,createCSS};

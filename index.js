@@ -12,6 +12,18 @@ const Employee = require('./lib/employee');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
 const { default: ListPrompt } = require('inquirer/lib/prompts/list');
+const fs = require('fs');
+
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, (err) =>
+        err ? console.error(err) : console.log('Success!')
+    );
+}
+
+
+const {createHTML,createCSS} = require( './src/template.js');
+
+
 
 let employeeList = [];
 let id = 1;
@@ -40,9 +52,7 @@ inquirer
     
   ])
   .then(function(response){
- console.log(response.managerName);
  let manager = new Manager(response.managerName, id, response.managerEmail, response.managerNumber);
- console.log(manager)
  employeeList.push(manager);
  id ++;
  generateEmployees()
@@ -111,7 +121,6 @@ function generateEngineer() {
       );
     }
 
-  let looper = 1;
   function generateEmployees(){
 
       inquirer.prompt([
@@ -132,10 +141,21 @@ function generateEngineer() {
         else if(response.userChoice == 'Add an intern'){
           generateIntern();
         }
-        else {
-          process.exit(0);
+        else if (response.userChoice == 'End'){
+          dist(employeeList);
+
         }
       })
-    console.log(employeeList);
+      
   }
-  generateEmployees();
+  function init(){
+   generateEmployees();
+  }
+
+init();
+
+function dist(employeeList){
+
+  createHTML(employeeList);
+  createCSS();
+}
