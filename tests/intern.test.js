@@ -37,5 +37,14 @@ describe("intern class", () => {
         expect("tom@email.com");
       })  
   })
+  describe("getUnique method", () => {
+    it("return school", () => {
+      const intern = new Intern( [
+        { name: "tom", id: 12, email: "tom@email.com", school: 'drexel' }
+      ]);
+      intern.getUnique();
+      expect("drexel");
+    })  
+})
   });
   
